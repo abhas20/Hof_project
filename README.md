@@ -15,6 +15,19 @@ Install the project with npm
   npm install 
   npm run dev
 ```
+## Environment Variables
+Create a . env file in backend folder
+To run this project, you will need to add the following environment variables to your .env file
+
+`DB_HOST=localhost`
+
+`DB_USER=root`
+
+`DB_PASSWORD='your password'`(Add the password)
+
+
+`DB_NAME='your database name'`
+(First create a database in MySQL, then add the name of empty database created)
 ### Backend:
 Install the project 
 
@@ -25,14 +38,3 @@ Install the project
   pip install -r requirements.txt (only first time)
   python -m uvicorn firstapi:app --reload
   ```
-## Environment Variables
-Create a . env file in backend folder
-To run this project, you will need to add the following environment variables to your .env file
-
-`DB_HOST=localhost`
-
-`DB_USER=root`
-
-`DB_PASSWORD='your password'`
-
-`DB_NAME='your database name'`
