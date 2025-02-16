@@ -62,7 +62,7 @@ const LoginPage = () => {
             />
             <h2 className="text-2xl font-bold text-gray-700 mt-4">Samadhan 2.0</h2>
             <p className="text-center text-gray-600 mt-2">
-              Unleash Your Academic Success with Exam Mastery Hub’s Platform.
+            Unleash Your Grivence Just like that.
             </p>
           </div>
 

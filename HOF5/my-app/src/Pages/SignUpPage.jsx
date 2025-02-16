@@ -61,7 +61,7 @@ const SignupPage = () => {
           <div className="hidden lg:flex w-1/2 p-10 flex-col items-center justify-center bg-green-50">
             <img src="https://plus.unsplash.com/premium_vector-1682302934485-6d593c4020c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fGlkZWF8ZW58MHx8MHx8fDA%3D" alt="Samadhan 2.0" className="w-44 sm:w-64" />
             <h2 className="text-2xl font-bold text-gray-700 mt-4">Samadhan 2.0</h2>
-            <p className="text-center text-gray-600 mt-2">Unleash Your Academic Success with Exam Mastery Hub’s Platform.</p>
+            <p className="text-center text-gray-600 mt-2">Unleash Your Grivence Just like that.</p>
           </div>
         </div>
       </div>
