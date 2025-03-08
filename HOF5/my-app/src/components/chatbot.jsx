@@ -7,7 +7,7 @@ const Chatbot = () => {
       { sender: "bot", text: "Hello! How can I help you?" },
     ]);
     const [input, setInput] = useState("");
-    const KEY = import.meta.env.SECRET_KEY;
+    const KEY=import.meta.env.VITE_SECRET_KEY;
   
     const toggleChatbot = () => setIsOpen(!isOpen);
   
@@ -17,29 +17,28 @@ const Chatbot = () => {
       // Add user message to the chat
       setMessages(prevMessages => [...prevMessages, { sender: "user", text: input }]);
       setInput(""); // Clear input field
-  
       try {
         const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${KEY}`,
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           },
           body: JSON.stringify({
             "model": "mistralai/ministral-8b",
-           "messages": [
-          {
-            "role": "user",
-            "content": input,
-      }
-    ]
-          }),
+            "messages": [
+              {
+                "role": "user",
+                "content": input
+              }
+            ]
+          })
         });
   
         if (!res.ok) {
           throw new Error('Failed to fetch data');
         }
-  
+        console.log(res.status);
         const data = await res.json();
         const botMessage = data?.choices?.[0]?.message?.content || "No response";
         
