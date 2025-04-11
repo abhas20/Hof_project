@@ -1,3 +1,3 @@
 #!/bin/bash
 
-uvicorn main:firstapi --host 0.0.0.0 --port 10000
+uvicorn firstapi:app --host 0.0.0.0 --port 10000
