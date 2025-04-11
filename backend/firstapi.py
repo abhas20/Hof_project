@@ -57,7 +57,7 @@ def get_db():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Frontend URL (adjust as needed)
+    allow_origins=["http://localhost:5173","https://hof-project.vercel.app/"],  # Frontend URL (adjust as needed)
     allow_credentials=True,
     allow_methods=["*"],  # Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
     allow_headers=["*"],  # Allow all headers
