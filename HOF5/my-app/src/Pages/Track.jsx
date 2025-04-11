@@ -127,6 +127,7 @@ const TrackGrievance = () => {
             <p><strong>Description:</strong> {grievance.grievance_description}</p>
             <p><strong>Status:</strong> {grievance.status}</p>
             <p><strong>Contact:</strong> {grievance.mobile}</p>
+            <p><strong>Rating:</strong> {grievance.urgency_level}</p>
           </div>
         )}
 
