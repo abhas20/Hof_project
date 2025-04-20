@@ -28,11 +28,14 @@ const LoginPage = () => {
             setText("Login failed: " + error.message);
           }
         }
+        finally{
+          setTimeout(() => {
+            setText(""); // Clears the text
+          }, 10000);
+        
+        }
       };
-    setTimeout(() => {
-          setText(""); // Clears the text
-        }, 8000);
-      
+    
     const handleChange=(e)=>{
       const {name,value} = e.target;
       setFormData({...formData,[name]:value})
