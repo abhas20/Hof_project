@@ -142,9 +142,13 @@ async def login(user:Customer,db:Session=Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
     if user.password != db_user.password:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
-    
+    user_data = {
+    "id": db_user.id,
+    "username": db_user.name,
+    "email": db_user.email
+    }
 
-    return {"message": "Login successful"} 
+    return {"message": "Login successful","User":user_data} 
 
 @app.get("/grivence/{id}",status_code=status.HTTP_200_OK)
 async def get_data(id:int,db:Session=Depends(get_db)):
