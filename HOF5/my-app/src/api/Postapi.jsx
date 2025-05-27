@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api=axios.create({
-    baseURL:"https://grivence-back.up.railway.app/"
+    baseURL:"https://grivence-back.up.railway.app/" || "http://localhost:8000"
 }
 )
 

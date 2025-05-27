@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { postUserData } from "../api/Postapi";
 
 const SignupPage = () => {
@@ -10,11 +10,12 @@ const SignupPage = () => {
       email:'', 
       password:''
     })
-
+    const navigate=useNavigate();
     const addData =async ()=>{
       const res=await postUserData(formData);
       console.log(res);
       setText("Signed Up Successfully !!!")
+      navigate('/login')
      
    };
 

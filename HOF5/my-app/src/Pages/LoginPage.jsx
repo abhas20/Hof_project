@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom'
+import {Link, Router, useNavigate} from 'react-router-dom'
 import { postLoginData } from "../api/Postapi";
 
 const LoginPage = () => {
@@ -10,12 +10,13 @@ const LoginPage = () => {
         email:'', 
         password:''
       })
-      
+      const router=useNavigate()
       const addData = async () => {
         try {
           const res = await postLoginData(formData);
           console.log(res);
           setIsSuccess(true);
+          router('/')
           setText(res.data.message + "!!!");
         } catch (error) {
           console.error(error);
