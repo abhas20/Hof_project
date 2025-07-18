@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../Providers/hooks/useAuth";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const {auth, setAuth} = useAuth(); 
 
   return (
     <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 w-[85%] bg-green-100 shadow-lg rounded-full px-6 py-2 flex justify-between items-center z-50">
@@ -21,10 +23,26 @@ const Navbar = () => {
       </div>
 
       {/* ✅ Login & Signup (Hidden on Mobile) */}
+      {auth.user ?
+      <div className="hidden md:flex space-x-4">
+        <Link to="/dashboard" className="px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-800">Dashboard</Link>
+        <button 
+          className="px-4 py-2 border rounded-xl text-gray-700 hover:bg-gray-200"
+          onClick={() => {
+            setAuth({user: null});
+            localStorage.removeItem('user');
+          }}
+        >
+          Logout
+        </button>
+      </div>
+      :
       <div className="hidden md:flex space-x-4">
         <Link to="/login" className="px-4 py-2 border rounded-xl text-gray-700 hover:bg-gray-200">Login</Link>
         <Link to="/signup" className="px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-800">Sign up</Link>
       </div>
+      }
+
 
       {/* ✅ Mobile Menu Button (Visible on Small Screens) */}
       <button 
@@ -43,8 +61,23 @@ const Navbar = () => {
           <Link to="/track" className="text-gray-700 hover:text-green-600">Track Grievance</Link>
           <Link to="/faq" className="text-gray-700 hover:text-green-600">FAQ's</Link>
           <Link to="/contactus" className="text-gray-700 hover:text-green-600">Contact Us</Link>
+          {auth.user ? 
+          <>
+          <Link to="/dashboard" className="px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-800">Dashboard</Link>
+          <button 
+            className="px-4 py-2 border rounded-xl text-gray-700 hover:bg-gray-200"
+            onClick={() => {
+              setAuth({user: null});
+              localStorage.removeItem('user');
+            }}>
+            Logout
+            </button>
+          </>
+          :
+          <>
           <Link to="/login" className="px-4 py-2 border rounded-xl text-gray-700 hover:bg-gray-200">Login</Link>
           <Link to="/signup" className="px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-800">Sign up</Link>
+          </>}
         </div>
       )}
     </nav>

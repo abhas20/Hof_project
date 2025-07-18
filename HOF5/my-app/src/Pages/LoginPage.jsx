@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Link, Router, useNavigate} from 'react-router-dom'
 import { postLoginData } from "../api/Postapi";
+import useAuth from "../Providers/hooks/useAuth";
 
 const LoginPage = () => {
   const [isSucces, setIsSuccess] = useState(false);
@@ -10,6 +11,7 @@ const LoginPage = () => {
         email:'', 
         password:''
       })
+      const {auth,setAuth}=useAuth();
       const router=useNavigate()
       const addData = async () => {
         try {
@@ -18,6 +20,10 @@ const LoginPage = () => {
           setIsSuccess(true);
           router('/')
           setText(res.data.message + "!!!");
+          setAuth({
+            user:res.data.User,
+          });
+          localStorage.setItem('user', JSON.stringify(res.data.User));
         } catch (error) {
           console.error(error);
           if (error.response) {

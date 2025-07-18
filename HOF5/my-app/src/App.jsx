@@ -10,6 +10,7 @@ import FeedbackPage from "./Pages/Feedback";
 import Login from "./Pages/LoginPage";
 import Signup from "./Pages/SignUpPage";
 import Dashboard from "./Pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
@@ -18,13 +19,16 @@ const App = () => {
       <Chatbot />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/lodgeg" element={<LodgeGrievance />} />
-        <Route path="/track" element={<TrackGrievance />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/feedback" element={<FeedbackPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard/>}/>
+
+        <Route path="" element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/lodgeg" element={<LodgeGrievance />} />
+            <Route path="/track" element={<TrackGrievance />} />
+        </Route>
       </Routes>
     </Router>
   );

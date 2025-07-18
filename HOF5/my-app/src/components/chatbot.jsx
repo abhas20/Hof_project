@@ -18,32 +18,61 @@ const Chatbot = () => {
       setMessages(prevMessages => [...prevMessages, { sender: "user", text: input }]);
       setInput(""); // Clear input field
       try {
-        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${KEY}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            "model": "mistralai/ministral-8b",
-            "messages": [
-              {
-                "role": "user",
-                "content": input
-              }
-            ]
-          })
-        });
-  
+        const res = await fetch(
+          "https://openrouter.ai/api/v1/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "mistralai/ministral-8b",
+              messages: [
+                {
+                  role: "user",
+                  content: `You are a helpful, empathetic, and professional grievance assistant chatbot. Your role is to guide users through the process of lodging, tracking, and resolving grievances. You must clearly understand their concerns, provide accurate instructions, and ensure a polite and reassuring tone.
+
+                  Your primary responsibilities:
+                  1. Greet the user and offer assistance.
+                  2. Ask relevant questions to gather grievance details (category, description, location, urgency, etc.).
+                  3. Help the user submit a grievance form or escalate it to the correct department.
+                  4. Allow users to track existing grievance status using their grievance ID or registered email.
+                  5. Provide estimated timelines or next steps if known.
+                  6. Reassure the user and offer follow-up options (e.g., support email or escalation).
+
+                Tone:
+                - Professional but friendly.
+                - Empathetic when users are frustrated or anxious.
+                - Clear and action-oriented when giving steps.
+
+              Constraints:
+              - Do not provide legal advice.
+              - Do not promise resolution but encourage users to follow official procedures.
+              - If you're unsure, recommend contacting human support.
+
+          Begin each conversation by introducing yourself and asking how you can assist.
+          User's message: "${input}"
+`,
+                },
+              ],
+            }),
+          }
+        );
+
         if (!res.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error("Failed to fetch data");
         }
-        console.log(res.status);
+        console.log(res);
         const data = await res.json();
-        const botMessage = data?.choices?.[0]?.message?.content || "No response";
-        
+        const botMessage =
+          data?.choices?.[0]?.message?.content || "No response";
+
         // Add bot response to the chat
-        setMessages(prevMessages => [...prevMessages, { sender: "bot", text: botMessage }]);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { sender: "bot", text: botMessage },
+        ]);
       } catch (error) {
         // Log error for debugging
         console.error("Error fetching from OpenRouter API", error);
@@ -58,6 +87,13 @@ const Chatbot = () => {
         ]);
       }
     };
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        handleSend(); 
+      }
+    }
   
     return (
       <div className="fixed bottom-4 right-4">
@@ -91,6 +127,7 @@ const Chatbot = () => {
                 onChange={(e) => setInput(e.target.value)}
                 className="flex-1 p-2 border rounded-l-md focus:outline-none"
                 placeholder="Type a message..."
+                onKeyDown={handleKeyDown} 
               />
               <button onClick={handleSend} className="bg-green-600 text-white px-4 py-2 rounded-r-md">
                 Send
